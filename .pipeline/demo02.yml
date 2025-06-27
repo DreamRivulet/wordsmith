@@ -1,5 +1,6 @@
-trigger:
-- dev
-
-resources:
-- repo: self
+trigger:  
+  - main  
+pool:  
+  vmImage: 'ubuntu-latest'  
+steps:  
+  - script: echo Hello World  
