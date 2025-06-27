@@ -10,10 +10,11 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '7f9dc28e-5551-43ee-891f-33bf61a995de'
-  imageRepository: 'usernamepipelinesjavascriptdocker'
-  containerRegistry: 'repoistoryname.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
+  dockerRegistryServiceConnection: 'd5c2182c-a702-4b88-a997-1b0bf958780a'
+  imageRepository: 'devops-demo'
+  containerRegistry: 'samtest.azurecr.io'
+  appdockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
+  webdockerfilePath: '$(Build.SourcesDrectory)/web/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
