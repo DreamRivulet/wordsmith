@@ -17,8 +17,8 @@ variables:
   imageApiRepository: 'wordsmith-api'
   imageWebRepository: 'wordsmith-web'
   containerRegistry: 'samtest.azurecr.io'
-  apidockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
-  webdockerfilePath: '$(Build.SourcesDrectory)/web/Dockerfile'
+  apidockerfilePath: 'api/Dockerfile'
+  webdockerfilePath: 'web/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
