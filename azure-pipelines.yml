@@ -22,7 +22,7 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build and Push
+- stage: BuildandPush
   displayName: 'Build Docker Images and Push to ACR'
   jobs:
   - job: Build_Api_Image
