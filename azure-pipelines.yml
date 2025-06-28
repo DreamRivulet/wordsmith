@@ -3,17 +3,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- dev
+- main
 
 resources:
 - repo: self
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'd5c2182c-a702-4b88-a997-1b0bf958780a'
-  imageRepository: 'devops-demo'
+  dockerRegistryServiceConnection: '48452892-ba13-4851-9d72-f23e8ac8c026'
+  imageApiRepository: 'wordsmith-api'
+  imageWebRepository: 'wordsmith-web'
   containerRegistry: 'samtest.azurecr.io'
-  appdockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
+  apidockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
   webdockerfilePath: '$(Build.SourcesDrectory)/web/Dockerfile'
   tag: '$(Build.BuildId)'
 
@@ -21,20 +22,34 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  displayName: Build and push stage
+- stage: Build and Push
+  displayName: 'Build Docker Images and Push to ACR'
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Build_Api_Image
+    displayName: 'Build and Push API Docker image'
     pool:
       vmImage: $(vmImageName)
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: 'Build and push the Api image to container registry'
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
+        repository: $(imageApiRepository)
+        dockerfile: $(apidockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+  - job: Build_Web_Image
+    displayName: 'Build and Push the Web image to the ACR'
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: 'Build and Push the Web image to the ACR'
+      inputs:
+        command: buildAndPush
+        repository: $(imageWebRepository)
+        dockerfile: $(webdockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
