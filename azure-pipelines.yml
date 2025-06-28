@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '48452892-ba13-4851-9d72-f23e8ac8c026'
+  dockerRegistryServiceConnection: 'fd0a5af1-7c0c-4e86-993f-c78c1f57d177'
   imageApiRepository: 'wordsmith-api'
   imageWebRepository: 'wordsmith-web'
   containerRegistry: 'samtest.azurecr.io'
