@@ -8,6 +8,9 @@ trigger:
 resources:
 - repo: self
 
+pool:  
+  name: 'sam-hosted'  
+
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'fd0a5af1-7c0c-4e86-993f-c78c1f57d177'
@@ -27,8 +30,6 @@ stages:
   jobs:
   - job: Build_Api_Image
     displayName: 'Build and Push API Docker image'
-    pool:
-      vmImage: $(vmImageName)
     steps:
     - task: Docker@2
       displayName: 'Build and push the Api image to container registry'
@@ -41,8 +42,6 @@ stages:
           $(tag)
   - job: Build_Web_Image
     displayName: 'Build and Push the Web image to the ACR'
-    pool:
-      vmImage: $(vmImageName)
     steps:
     - task: Docker@2
       displayName: 'Build and Push the Web image to the ACR'
